@@ -1,0 +1,148 @@
+//- Mixin: Fluid Type
+///
+/// Magic calc + vh to allow text to be fluid between minimum
+/// and maximum breakpoints.
+///
+/// @group typography
+/// @param {variable} $min-font-size [12px] - Minimum font size 
+/// @param {variable} $max-font-size [24px] - Maximum font size
+/// @param {variable} $lower-range [420px] - Stop scaling font smaller at this screen resolution 
+/// @param {variable} $upper-range [900px] - Stop scaling font larger at this screen resolution 
+/// @example
+///   h1 {
+///     @include responsive-type(20px, 48px);
+///   }
+/// @site https://madebymike.com.au/writing/precise-control-responsive-typography/
+
+@mixin fluid-type($min-font-size: 12px, $max-font-size: 21px, $lower-range: 420px, $upper-range: 900px) {
+    font-size: calc(#{$min-font-size} + #{(($max-font-size / ($max-font-size * 0 + 1)) - ($min-font-size / ($min-font-size * 0 + 1)))} * ( (100vw - #{$lower-range}) / #{(($upper-range / ($upper-range * 0 + 1)) - ($lower-range / ($lower-range * 0 + 1)))}));
+    @media screen and (max-width: $lower-range) {
+        font-size: $min-font-size;
+    }
+    @media screen and (min-width: $upper-range) {
+        font-size: $max-font-size;
+    }
+}
+
+/* SOMMAIRE
+-----------------------------------------------------
+FAMILLE 
+GRAISSE
+TAILLE
+HAUTEUR DE LIGNE
+DECALAGE
+COULEUR
+ALIGNEMENT
+-----------------------------------------------------
+*/
+
+
+/* FAMILLE */
+.font-base {
+    font-family: $basefont;
+}
+
+/*--------------------------------------------------*/
+
+
+/* GRAISSE */
+.extra{
+    font-weight: 200;
+}
+.light {
+    font-weight: 300;
+}
+
+.medium {
+    font-weight: 500;
+}
+
+.semi {
+    font-weight: 600;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+/*--------------------------------------------------*/
+
+
+/* TAILLE */
+.font-000 {
+    @include fluid-type( 9px, 16px, 420px, $mega);
+}
+
+.font-00 {
+    @include fluid-type( 10px, 18px, 420px, $mega);
+}
+
+.font-0 {
+    @include fluid-type( 11px, 21px, 420px, $mega);
+}
+
+.font-1 {
+    @include fluid-type( 12px, 24px, 420px, $mega);
+}
+
+.font-2 {
+    @include fluid-type( 14px, 36px, 420px, $mega);
+}
+
+.font-3{
+    @include fluid-type( 16px, 48px, 420px, $mega);
+}
+
+.font-6 {
+    @include fluid-type( 32px, 160px, 420px, $mega);
+    letter-spacing: -6px;
+    margin-left: -12px;
+}
+
+/*--------------------------------------------------*/
+
+
+/* HAUTEUR DE LIGNE */
+
+.l-2 {
+    line-height: 2;
+}
+
+/*--------------------------------------------------*/
+
+
+/* DECALAGE */
+
+.dec-1{
+    margin-top:-3rem;
+}
+
+.dec-2 {
+    margin-top: -6rem;
+}
+
+/*--------------------------------------------------*/
+
+
+/* COULEUR */
+
+.red{
+    color: $red;
+}
+
+.white {
+    color: $white;
+}
+
+
+/*--------------------------------------------------*/
+
+
+/* ALIGNEMENT */
+
+
+/*--------------------------------------------------*/
+
+
+
+

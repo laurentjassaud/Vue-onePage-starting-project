@@ -1,0 +1,8 @@
+#preloader{
+    position: absolute;
+    width:100vw;
+    height:100vh;
+    background-color: $white;
+    z-index: 25;
+    pointer-events: none;
+}
