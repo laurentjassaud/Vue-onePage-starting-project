@@ -368,8 +368,8 @@
     	<!-- Testimonials section --> 
 
 		<!-- Get a quote section -->
-		<section id="contact">
-			<div class="container section d-flex justify-content-center align-items-center">
+		<section id="contact" class="section">
+			<div class="container d-flex justify-content-center align-items-center">
 				<div class="row justify-content-md-center">
 					<div class="col-md-10 content">
 						<h3>Looking for a new brand? Let's work together!</h3>
@@ -381,7 +381,7 @@
 		<!-- Get a quote section --> 
 
     	<!-- Footer section -->
-		<footer class="footer">
+		<footer id="footer" class="footer section">
 			<div class="footer-top d-flex justify-content-center align-items-center">
 				<div class="container">
 					<div class="row">
@@ -474,7 +474,7 @@
             }
 		},
 		
-		mounted() {			
+		mounted() {
 			this.init()	
 			this.addListeners()
 		},
@@ -482,11 +482,17 @@
 		methods: {   
 
 			init(){
+
 				// simule le preload des élements (images,...)
 				// mettre un vrai preloader
 				setTimeout(() => {
-					this.resize()
-				}, 100)		
+					this.resize()				
+					console.log('init sur onepage')
+					this.$nextTick(() => EventBus.$emit('PAGE_ONE_LOADED'))
+				}, 100)	
+
+
+
 			},
 
 			addListeners() {
@@ -507,7 +513,7 @@
                     const top = el.getBoundingClientRect().top + window.scrollY
 					const bottom = top + el.getBoundingClientRect().height
 					
-                    //console.log(el, top, bottom, 'h', el.getBoundingClientRect().height)
+                    console.log(el, top, bottom, 'h', el.getBoundingClientRect().height)
                     this.listElementsScrollable.push({el, top, bottom}) 
                 }
 			},

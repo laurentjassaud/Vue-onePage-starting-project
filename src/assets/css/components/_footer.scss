@@ -1,6 +1,7 @@
-.footer {
+#footer {
     text-align: left;
-    font-family: $basefont;    
+    font-family: $basefont;
+    position: relative;
     .footer-top {
         background-color: $gray-1000;
         height: 50vh;

@@ -8,6 +8,7 @@
 	import config from './config.json'
 	import { EventBus } from './event-bus.js'
 	import webFontsLoaderTool from './utils/webFontsLoaderTool'
+	import ScrollProgress from './class/scrollProgressBase'
 	import OnePage from './components/OnePage.vue'
 
 	export default {
@@ -29,31 +30,30 @@
 				config.fontAwesome,
 				() => {       
 					console.log('font ok')	
-					this.fontsOk = true		
+					this.fontsOk = true								
 				}
 			)
 		},
 
 		mounted() {
-			this.init()
 			this.addListeners()
 		},
 
 		methods: {       
 
 			init(){
-
 			},
 
 			addListeners() {
 				window.addEventListener('resize', this.resizeThrottler, false)
-            	window.addEventListener('scroll', this.scrollThrottler, false)
+				window.addEventListener('scroll', this.scrollThrottler, false)
+				EventBus.$on('PAGE_ONE_LOADED', this.initScrollProgress)
 			},
 
 			resizeThrottler() {
 				if (!this.ticking) {
 					window.requestAnimationFrame( () => {						
-						EventBus.$emit('RESIZE')
+						this.$nextTick(() => EventBus.$emit('RESIZE'))
 						this.ticking = false
 					})
 				}
@@ -69,7 +69,11 @@
                     })
                 }
                 this.ticking = true
-            },
+			},
+			
+			initScrollProgress() {
+				this.scrollProgress = new ScrollProgress(this.$el)				
+			}
 		}
 	}
 

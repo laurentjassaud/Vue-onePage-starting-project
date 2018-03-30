@@ -2,5 +2,6 @@
     "families": [
         "Source Sans Pro:300,400,600,700"
     ],
-    "fontAwesome" : true
+    "fontAwesome": true,
+    "animation": true
 }
